@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.nav {
+    &__list {
+        display: flex;
+        gap: 1rem;
+    }
+}
