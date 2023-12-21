@@ -3,7 +3,10 @@
 ## Overview
 
 - Next JS is a React Framework which adds various features to React
-  - ...
+  - File-system based router
+  - Server side render
+  - Font optimisation
+  - Image optimisation
 
 ## Concepts
 
@@ -50,3 +53,17 @@ Benifits:
   - **Initial Page Load**: Is instant since the HTML is generated on the server
   - **SEO/Social Card Previews**: Bots can crawl your initial page load
   - **Streaming**: We can load some components later (for slower requests)
+
+### Optimised Fonts
+
+Usually when fetching font files hosted on a server, [Cumulative Layout Shift](https://web.dev/articles/cls) can occur, which is a metric Google uses to evaluate the UX performance of a website.
+
+![Cumulative Layout Shift](https://nextjs.org/_next/image?url=%2Flearn%2Flight%2Ffont-layout-shift.png&w=3840&q=75&dpl=dpl_HodmRRocPAANM5iMuN2bWfH9kFAK)
+
+This happens because the browser initially renders a fallback/system font, then swaps it out for a custom font once it's loaded.
+
+Next JS automatically optimises fonts when you use the `next/font` module:
+- Fonts are downloaded at build time
+- They're hosted with your other static assets
+
+### Optimised Images

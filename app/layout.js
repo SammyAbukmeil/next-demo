@@ -1,8 +1,6 @@
-import { Inter } from "next/font/google";
-import "@/app/ui/globals.css";
+import { roboto } from "./ui/fonts";
+import "@/app/ui/global.scss";
 import Header from "./ui/Header/Header";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Acme Media",
@@ -12,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <Header />
         {children}
       </body>

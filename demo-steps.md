@@ -5,11 +5,15 @@
   
 - `npm run dev`
 
+## Routing
+
 - Explain routing (see `README.md`)
 
-- Update `app/page.js` 
+- Update `app/page.js` to remove the boilerplate and add a `<h1>`
 
-- Update `app/global.css` delete all `:root` and `body` styles
+## Styling Options
+
+- Update `app/global.css` delete all `:root` and `body` styles and show tailwind directives
 
 - Update `layout.js` meta data
 
@@ -18,28 +22,35 @@
 - Create a `app/ui/home.module.css` to show CSS Modules and add styles in `page.js`
 
 ```css
-.logo {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background-color: blue;
-  display: inline;
-  margin: 0 1rem;
+.title {
+  font-size: 2rem;
+  background-color: red;
 }
 ```
 
 ```js
 import styles from "@/app/ui/home.module.css";
 
-// ...
-
-<div className={styles.logo}></div>
+<h1 className={styles.title}></h1>
 ```
 
 - Move the `<h1>` to a `<Header />` in `layout.js` and a `<nav>`
 
-- `npm i sass` and added header styles
+- `npm i sass` and added header styles. Also Update `globals.css` to `global.scss`
 
 - Remove the `app/ui/home.module.css` and the import from `page.js`
 
-Continue from https://nextjs.org/learn/dashboard-app/optimizing-fonts-images
+## Fonts
+
+- Explain optimised fonts (see `README.md`)
+
+- Add a primary font
+  - Remove the inter font from `layout.js` and add `app/ui/fonts.js` then set it on the body of `layout.js`
+  - The subsets are here: https://fonts.google.com/specimen/Roboto/glyphs
+  - The weights are here: https://fonts.google.com/specimen/Roboto 
+
+- Add a secondary font
+  - Add playfair display in `app/ui/fonts.js`
+  - Use it in `<Header>`
+
+Continue from https://nextjs.org/learn/dashboard-app/optimizing-fonts-images#why-optimize-images
