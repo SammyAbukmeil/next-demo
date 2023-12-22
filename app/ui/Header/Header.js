@@ -1,16 +1,13 @@
-import { playfairDisplay } from "../fonts";
-import "./Header.scss";
+import { playfairDisplay } from "@/app/ui/fonts";
+import "@/app/ui/Header/Header.scss";
+import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="header">
-      <h1 className="header__title">Acme Media</h1>
-      <nav className={`${playfairDisplay.className} nav`}>
-        <ul className="nav__list">
-            <li className="nav__item">Home</li>
-            <li className="nav__item">Account</li>
-        </ul>
-      </nav>
+    <header>
+      <Link href="/">
+        <h1 className={playfairDisplay.className}>Acme Dashboard</h1>
+      </Link>
     </header>
   );
 }

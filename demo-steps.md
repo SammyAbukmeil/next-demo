@@ -2,7 +2,6 @@
 
 - `npx create-next-app@latest`
   - Without typescript
-  
 - `npm run dev`
 
 ## Routing
@@ -31,10 +30,10 @@
 ```js
 import styles from "@/app/ui/home.module.css";
 
-<h1 className={styles.title}></h1>
+<h1 className={styles.title}></h1>;
 ```
 
-- Move the `<h1>` to a `<Header />` in `layout.js` and a `<nav>`
+- Move the `<h1>` to a `<Header />` in `layout.js`
 
 - `npm i sass` and added header styles. Also Update `globals.css` to `global.scss`
 
@@ -45,12 +44,38 @@ import styles from "@/app/ui/home.module.css";
 - Explain optimised fonts (see `README.md`)
 
 - Add a primary font
+
   - Remove the inter font from `layout.js` and add `app/ui/fonts.js` then set it on the body of `layout.js`
   - The subsets are here: https://fonts.google.com/specimen/Roboto/glyphs
-  - The weights are here: https://fonts.google.com/specimen/Roboto 
+  - The weights are here: https://fonts.google.com/specimen/Roboto
 
 - Add a secondary font
+
   - Add playfair display in `app/ui/fonts.js`
   - Use it in `<Header>`
 
+- Add hero images to `public/`
+
 Continue from https://nextjs.org/learn/dashboard-app/optimizing-fonts-images#why-optimize-images
+
+## Add more routes
+
+- Add a dashboard folder inside `app/dashboard/`
+
+- Add a page inside dashboard `app/dashboard/page.js`
+
+```js
+export default function Page() {
+  return <p>Dashboard Page</p>;
+}
+```
+
+- Test it by visiting `/dashboard`
+
+- Add `app/dashboard/customers/page.js` and `app/dashboard/invoices/page.js` with just a `<p>` for now
+
+- Add `app/dashboard/layout.js`
+
+- Add a `<Link>` to the `<Header>` to go back to the homepage
+
+- Add a `<Link>` to the homepage to go to the dashboard

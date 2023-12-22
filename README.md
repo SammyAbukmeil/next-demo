@@ -3,8 +3,8 @@
 ## Overview
 
 - Next JS is a React Framework which adds various features to React
-  - File-system based router
-  - Server side render
+  - File-system routing
+  - Server side rendering
   - Font optimisation
   - Image optimisation
 
@@ -67,3 +67,22 @@ Next JS automatically optimises fonts when you use the `next/font` module:
 - They're hosted with your other static assets
 
 ### Optimised Images
+
+We can store static assets (e.g. images) in `/public` and reference them in our app.
+
+Using the `<Image>` component from `next/image` provides the following automatic optimisations:
+- Prevent layout shift when images are loading
+- Resize large images for devices with a smaller viewport
+- Lazy load images by deafult (images load as they enter the viewport)
+- Serve images in modern formats (e.g. WebP and AVIF) if the browser supports it
+
+When using the `<Image>` component, it's good practice to set the `width` and `height` (measured in pixels) to avoid layout shift, which should have an aspect ratio which is identical to the source image (can test in Preview's resize tool)
+
+```js
+<Image
+  src="/hero-desktop.png"
+  width={1000}
+  height={760}
+  alt="Screenshot of dashboard on mobile and desktop"
+/>
+```
