@@ -7,6 +7,7 @@
   - Server side rendering
   - Font optimisation
   - Image optimisation
+  - Automatic code-splitting and prefetching
 
 ## Concepts
 
@@ -14,7 +15,7 @@
 
 _Note: Previous versions of Next JS (V13 and below) use the `pages/` directory which is still supported._
 
-Routing in Next JS V14 is managed via a creating folders and files within the `app/` directory (i.e. a "file-system based router") - [nextjs.org/docs/routing](https://nextjs.org/docs/app/building-your-application/routing)
+Routing in Next V14 is managed via a creating folders and files within the `app/` directory (i.e. a "file-system based router") - [nextjs.org/docs/routing](https://nextjs.org/docs/app/building-your-application/routing)
   - Folders define routes
   - Files are used to create some UI
 
@@ -54,6 +55,8 @@ Benifits:
   - **SEO/Social Card Previews**: Bots can crawl your initial page load
   - **Streaming**: We can load some components later (for slower requests)
 
+If you want to use a hook in your component, you need to turn your component in a Client Component by adding React's `"use client"` direction at the top of the file.
+
 ### Optimised Fonts
 
 Usually when fetching font files hosted on a server, [Cumulative Layout Shift](https://web.dev/articles/cls) can occur, which is a metric Google uses to evaluate the UX performance of a website.
@@ -86,3 +89,13 @@ When using the `<Image>` component, it's good practice to set the `width` and `h
   alt="Screenshot of dashboard on mobile and desktop"
 />
 ```
+
+### Automatic code-splitting and prefetching
+
+Next JS automatically code splits your application by route segments
+- This is different to a traditional React SPA where the browser loads all your application code on initial load
+- This means that pages are isolated. If a certain page throws an error, the rest of the app will still work
+
+In production, when a `<Link>` appears in the viewport, Next JS automatically prefetches the code for that route in the background.
+- When the user clicks, the code for the destination page will already be loaded
+- This makes page transitions near-instant.
