@@ -79,3 +79,7 @@ export default function Page() {
 - Add a `<Link>` to the `<Header>` to go back to the homepage
 
 - Add a `<Link>` to the homepage to go to the dashboard
+
+## Database
+
+https://nextjs.org/learn/dashboard-app/setting-up-your-database
