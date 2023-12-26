@@ -82,4 +82,33 @@ export default function Page() {
 
 ## Database
 
+- Deploy the project on Vercel
+
+- (If a DB exists, go back to main page > storage > delete)
+
+- Project > Storage > Connect Store > Postgres > Defaults...
+
+- Get .env details from `.env.local` tab
+
+- Make a `.env`, paste, and add to `.gitginore` and `npm i dotenv bcrypt`
+
+- `npm i @vercel/postgres` to get vercel postgres SDK
+
+- Make `scrpits/seed.js`
+
+- Make `app/lib/placeholder-data.js`
+
+- Add `"seed": "node -r dotenv/config ./scripts/seed.js"` script (-r loads dotenv from node_modules)
+
+- Run `npm run seed`
+
+- Go to data tab on vercel, browse the tables, and run
+
+```sql
+SELECT invoices.amount, customers.name
+FROM invoices
+JOIN customers ON invoices.customer_id = customers.id
+WHERE invoices.amount = 666;
+```
+
 https://nextjs.org/learn/dashboard-app/setting-up-your-database
