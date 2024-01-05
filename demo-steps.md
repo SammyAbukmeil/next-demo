@@ -56,8 +56,6 @@ import styles from "@/app/ui/home.module.css";
 
 - Add hero images to `public/`
 
-Continue from https://nextjs.org/learn/dashboard-app/optimizing-fonts-images#why-optimize-images
-
 ## Add more routes
 
 - Add a dashboard folder inside `app/dashboard/`
@@ -111,4 +109,12 @@ JOIN customers ON invoices.customer_id = customers.id
 WHERE invoices.amount = 666;
 ```
 
-https://nextjs.org/learn/dashboard-app/setting-up-your-database
+## Fetching Data
+
+- Add `app/lib/data.js` (the logic in here could be done in components, but moving it into a module allows for separate of concerns)
+
+- Add `app/lib/utils.js`
+
+- Update `app/dashboard/page.js` 
+
+- Add `app/ui/Dashboard/cards.js` and `app/ui/Dashboard/revenue-chart.js` and `app/ui/Dashboard/latest-invoces.js`

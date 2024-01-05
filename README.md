@@ -99,3 +99,23 @@ Next JS automatically code splits your application by route segments
 In production, when a `<Link>` appears in the viewport, Next JS automatically prefetches the code for that route in the background.
 - When the user clicks, the code for the destination page will already be loaded
 - This makes page transitions near-instant.
+
+## Vercel Postgres
+
+[Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) is a serverless SQL database which you can integrate into Next JS via:
+- [The `@vercel/postgres` SDK](https://vercel.com/docs/storage/vercel-postgres/sdk)
+- An ORM like [Prisma](https://www.prisma.io)
+
+[Pricing info](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing#pricing)
+
+## Fetching Data
+
+In Next JS, there are are a couple of approaches for fetching data:
+1. Create an API layer using [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+2. Using React Server Components, we can skip the API layer and query the database without risking exposing DB secrets to the client
+
+There are a few benifits of fetching data in Server Components:
+- Server components support promises
+- We can use `async/await` without `useEffect` and `useState`
+- They execute on the server, so expensive data fetching & logic is kept to the server, and the result is sent to the client
+- You can query the database directly without an additional API layer.
