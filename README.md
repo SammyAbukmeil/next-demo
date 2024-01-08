@@ -138,4 +138,4 @@ There are a few benifits of fetching data in Server Components:
 - They execute on the server, so expensive data fetching & logic is kept to the server, and the result is sent to the client
 - You can query the database directly without an additional API layer.
 
-## Check end of fetching-data...
+## Check end of fetching-data
