@@ -35,7 +35,9 @@ import styles from "@/app/ui/home.module.css";
 
 - Move the `<h1>` to a `<Header />` in `layout.js`
 
-- `npm i sass` and added header styles. Also Update `globals.css` to `global.scss`
+- `npm i sass` and add `app/ui/Header/Header.scss` styles. 
+
+- Update `globals.css` to `global.scss`
 
 - Remove the `app/ui/home.module.css` and the import from `page.js`
 
@@ -54,7 +56,13 @@ import styles from "@/app/ui/home.module.css";
   - Add playfair display in `app/ui/fonts.js`
   - Use it in `<Header>`
 
+## Images
+
+- Explain optimised images (see `README.md`)
+
 - Add hero images to `public/`
+
+- Add images to `app/page.js`
 
 ## Add more routes
 
@@ -72,7 +80,7 @@ export default function Page() {
 
 - Add `app/dashboard/customers/page.js` and `app/dashboard/invoices/page.js` with just a `<p>` for now
 
-- Add `app/dashboard/layout.js`
+- Add `app/dashboard/layout.js` and `app/ui/dashboard/sidebar.js`
 
 - Add a `<Link>` to the `<Header>` to go back to the homepage
 
@@ -84,19 +92,20 @@ export default function Page() {
 
 - (If a DB exists, go back to main page > storage > delete)
 
-- Project > Storage > Connect Store > Postgres > Defaults...
+- Project > Storage > Postgres > Defaults...
 
 - Get .env details from `.env.local` tab
 
-- Make a `.env`, paste, and add to `.gitginore` and `npm i dotenv bcrypt`
+- Make a `.env`, paste, and add to `.gitginore` and `npm i dotenv`
 
-- `npm i @vercel/postgres` to get vercel postgres SDK
+- Add `scrpits/seed.js`
 
-- Make `scrpits/seed.js`
+- `npm i @vercel/postgres bcrypt` to get vercel postgres SDK
 
 - Make `app/lib/placeholder-data.js`
 
-- Add `"seed": "node -r dotenv/config ./scripts/seed.js"` script (-r loads dotenv from node_modules)
+- Add `"seed": "node -r dotenv/config ./scripts/seed.js"` script 
+  - `-r` loads config from `dotenv` in `node_modules`
 
 - Run `npm run seed`
 
@@ -111,10 +120,14 @@ WHERE invoices.amount = 666;
 
 ## Fetching Data
 
-- Add `app/lib/data.js` (the logic in here could be done in components, but moving it into a module allows for separate of concerns)
+- Add `app/lib/data.js`
+  - The logic in here could be done in components, but moving it into a module allows for separate of concerns
 
-- Add `app/lib/utils.js`
+- Add `app/lib/utils.js` to get `formatCurrency()`
 
 - Update `app/dashboard/page.js` 
 
-- Add `app/ui/Dashboard/cards.js` and `app/ui/Dashboard/revenue-chart.js` and `app/ui/Dashboard/latest-invoces.js`
+- Add 
+  - `app/ui/dashboard/cards.js`
+  - `app/ui/dashboard/revenue-chart.js`
+  - `app/ui/dashboard/latest-invoces.js`

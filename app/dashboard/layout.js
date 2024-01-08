@@ -1,4 +1,4 @@
-import Sidebar from "@/app/ui/Dashboard/Sidebar";
+import Sidebar from "@/app/ui/dashboard/sidebar";
 
 export default function Layout({ children }) {
   return (

@@ -1,9 +1,9 @@
-import { roboto } from "./ui/fonts";
+import { roboto } from "@/app/ui/fonts";
 import "@/app/ui/global.scss";
-import Header from "./ui/Header/Header";
+import Header from "@/app/ui/Header/Header";
 
 export const metadata = {
-  title: "Acme Media",
+  title: "Acme",
   description: "An admin dashboard",
 };
 

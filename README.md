@@ -21,7 +21,7 @@ Routing in Next V14 is managed via a creating folders and files within the `app/
 
 ![Route Segments](https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Froute-segments-to-path-segments.png&w=1920&q=75&dpl=dpl_D8FSJkm5fGY8PYCjNmfLdsHxEyk8)
 
-Notice the term "segment above"
+Notice the term "segment" above
 
 There are a few "special files" that Next JS provides to build different parts of the UI (using `.js`, `.jsx` or `.tsx`)
   - `layout.js` creates shared UI for a segment + child segments
@@ -40,6 +40,22 @@ If you have a nested route, the component hierarchy is setup like so:
 
 ![Nested Component Hierarchy](https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fnested-file-conventions-component-hierarchy.png&w=1920&q=75&dpl=dpl_D8FSJkm5fGY8PYCjNmfLdsHxEyk8)
 
+### Path Aliases
+
+Next JS allows you to alias directories to make importing easier
+
+```js
+// before
+import { Button } from '../../../components/button'
+ 
+// after
+import { Button } from '@/components/button'
+```
+
+`@` is an alias for the root directory
+
+You can add custom aliases [exmaples](https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#absolute-imports)
+
 ### React Server Components
 
 - By default, components created inside the `app/` directory are React Server Components
@@ -56,6 +72,8 @@ Benifits:
   - **Streaming**: We can load some components later (for slower requests)
 
 If you want to use a hook in your component, you need to turn your component in a Client Component by adding React's `"use client"` direction at the top of the file.
+
+Here's a table showing [when you should choose server vs client components](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#when-to-use-server-and-client-components)
 
 ### Optimised Fonts
 
