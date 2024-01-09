@@ -122,6 +122,7 @@ WHERE invoices.amount = 666;
 
 - Add `app/lib/data.js`
   - The logic in here could be done in components, but moving it into a module allows for separate of concerns
+  - MAKE SURE THE TIMEOUT in `fetchRevenue` IS COMMENTED OUT + THE COMMENT ABOVE AND BELOW
 
 - Add `app/lib/utils.js` to get `formatCurrency()`
 
@@ -131,3 +132,16 @@ WHERE invoices.amount = 666;
   - `app/ui/dashboard/cards.js`
   - `app/ui/dashboard/revenue-chart.js`
   - `app/ui/dashboard/latest-invoces.js`
+
+## Switch to dynamic rendering
+
+ In `app/lib/data.js`
+ - Add `import { unstable_noStore as noStore } from 'next/cache';`
+ - Add `noStore();` too all data fetching functions
+ - Comment in the timeout and the console logs below and above (you'll see in the terminal)
+
+The whole page is blocked while the data is being fetched
+
+The app is only as fast as the slowest data fetch, however, we can use streaming for the slower requests
+
+## Carry on from https://nextjs.org/learn/dashboard-app/streaming

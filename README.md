@@ -138,4 +138,60 @@ There are a few benifits of fetching data in Server Components:
 - They execute on the server, so expensive data fetching & logic is kept to the server, and the result is sent to the client
 - You can query the database directly without an additional API layer.
 
-## Check end of fetching-data
+## Static vs Dynamic Rendering
+
+### Static Rendering
+
+- Data fetching / rendering happens:
+  - On the server at build time (during deployment)
+  - Or, during revalidation (i.e. purging the data cache & re-fetching programmatically based on time / an event)
+- The result can be distributed / cached via a CDN
+- When a user visits your app, the cached result is served
+
+Benfits:
+- Speed
+- Reduced Server Load
+- SEO
+
+Use cases:
+- UI's with no data / data that's the same for all users (blog, product page etc)
+
+Not good for:
+- Personalised data (dashboards etc)
+- Regularly updating data 
+
+### Dynamic Rendering
+
+- Data fetching happens on the server for each user at request time (page load)
+
+Use cases:
+- Displaying real time / frequently changing data
+- Displaying user specific content (user profile)
+- Updating data on user interaction
+- Accessing request time info (cookies, URL params)
+
+The `@vercel/postgres` SDK doesn't set a caching mechanism
+
+Therefore we're able to set our own static/dynamic behaviour.
+
+We can use the Next JS `unstable_noStore` from `next/cache` inside
+- Server components
+- or, data fetching functions
+
+to opt out of static rendering
+
+```js
+import { unstable_noStore as noStore } from 'next/cache';
+
+function fetchData() {
+  noStore();
+}
+```
+
+This is equivalent to `fetch(..., {cache: 'no-store'})`
+
+Notes: 
+- `unstable_noStore` is an experimental API which may change
+- A stable API is to use "route segment options" in a page or layout file `export const dynamic = "force-dynamic"`
+
+## Carry on from https://nextjs.org/learn/dashboard-app/streaming#what-is-streaming
