@@ -227,4 +227,4 @@ The directory with `()` isn't added to the URL, and now `loading.js` will only a
 
 - The data fetching needs to happen in the `<DynamicComponent>` above, not in a parent and passed as a prop
 
-## Carry on from https://nextjs.org/learn/dashboard-app/streaming#what-is-streaming
+## Carry on from https://nextjs.org/learn/dashboard-app/streaming#grouping-components
