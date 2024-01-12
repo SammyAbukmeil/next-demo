@@ -218,4 +218,20 @@ export default async function RevenueChart() { // Add async, remove prop
   - Move import of `fetchLatestInvoices()` to `app/ui/dashboard/latest-invoices.js`
   - Remove recieving prop
 
-## Carry on from https://nextjs.org/learn/dashboard-app/streaming#grouping-components
+- We don't want each `<Card>` to be wrapped in a suspense, else we'll get a "popping" effect, so let's use a wrapper instead
+  - Delete the `<Card>` components and cut the function call
+  - Add
+
+```js
+<Suspense fallback={<CardsSkeleton />}>
+  <CardWrapper />
+</Suspense>
+```
+
+- In `app/ui/dashboard/cards.js` add the function call you cut, and import it
+
+- Delete `loading.js`
+- Move `page.js` to `dashboard/`
+- Delete (overview)
+
+## Carry on from https://nextjs.org/learn/dashboard-app/partial-prerendering

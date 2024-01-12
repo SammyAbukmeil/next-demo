@@ -1,4 +1,13 @@
+import { fetchCardData } from "@/app/lib/data";
+
 export default async function CardWrapper() {
+  const {
+    totalPaidInvoices,
+    totalPendingInvoices,
+    numberOfInvoices,
+    numberOfCustomers,
+  } = await fetchCardData();
+
   return (
     <>
       <Card title="Collected" value={totalPaidInvoices} type="collected" />

@@ -227,4 +227,8 @@ The directory with `()` isn't added to the URL, and now `loading.js` will only a
 
 - The data fetching needs to happen in the `<DynamicComponent>` above, not in a parent and passed as a prop
 
-## Carry on from https://nextjs.org/learn/dashboard-app/streaming#grouping-components
+- In general, it's good practice to move your data fetches down to the components that need it, and then wrap those components in `<Suspense>`
+
+- But there is nothing wrong with streaming the sections or the whole page if that's what your application needs.
+
+## Carry on from https://nextjs.org/learn/dashboard-app/partial-prerendering
