@@ -1,8 +1,8 @@
-# Next JS (V14)
+# Next.js (V14)
 
 ## Overview
 
-- Next JS is a React Framework which adds various features to React
+- Next.js is a React Framework which adds various features to React
   - File-system routing
   - Server side rendering
   - Font optimisation
@@ -13,7 +13,7 @@
 
 ### Routing
 
-_Note: Previous versions of Next JS (V13 and below) use the `pages/` directory which is still supported._
+_Note: Previous versions of Next.js (V13 and below) use the `pages/` directory which is still supported._
 
 Routing in Next V14 is managed via a creating folders and files within the `app/` directory (i.e. a "file-system based router") - [nextjs.org/docs/routing](https://nextjs.org/docs/app/building-your-application/routing)
   - Folders define routes
@@ -23,7 +23,7 @@ Routing in Next V14 is managed via a creating folders and files within the `app/
 
 Notice the term "segment" above
 
-There are a few "special files" that Next JS provides to build different parts of the UI (using `.js`, `.jsx` or `.tsx`)
+There are a few "special files" that Next.js provides to build different parts of the UI (using `.js`, `.jsx` or `.tsx`)
   - `layout.js` creates shared UI for a segment + child segments
   - `page.js` creates unique UI for a specific route + makes the route publicly accessible
   - `loading.js` creates loading UI for a segment and it's children
@@ -42,7 +42,7 @@ If you have a nested route, the component hierarchy is setup like so:
 
 ### Path Aliases
 
-Next JS allows you to alias directories to make importing easier
+Next.js allows you to alias directories to make importing easier
 
 ```js
 // before
@@ -83,7 +83,7 @@ Usually when fetching font files hosted on a server, [Cumulative Layout Shift](h
 
 This happens because the browser initially renders a fallback/system font, then swaps it out for a custom font once it's loaded.
 
-Next JS automatically optimises fonts when you use the `next/font` module:
+Next.js automatically optimises fonts when you use the `next/font` module:
 - Fonts are downloaded at build time
 - They're hosted with your other static assets
 
@@ -110,17 +110,17 @@ When using the `<Image>` component, it's good practice to set the `width` and `h
 
 ### Automatic code-splitting and prefetching
 
-Next JS automatically code splits your application by route segments
+Next.js automatically code splits your application by route segments
 - This is different to a traditional React SPA where the browser loads all your application code on initial load
 - This means that pages are isolated. If a certain page throws an error, the rest of the app will still work
 
-In production, when a `<Link>` appears in the viewport, Next JS automatically prefetches the code for that route in the background.
+In production, when a `<Link>` appears in the viewport, Next.js automatically prefetches the code for that route in the background.
 - When the user clicks, the code for the destination page will already be loaded
 - This makes page transitions near-instant.
 
 ## Vercel Postgres
 
-[Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) is a serverless SQL database which you can integrate into Next JS via:
+[Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) is a serverless SQL database which you can integrate into Next.js via:
 - [The `@vercel/postgres` SDK](https://vercel.com/docs/storage/vercel-postgres/sdk)
 - An ORM like [Prisma](https://www.prisma.io)
 
@@ -128,7 +128,7 @@ In production, when a `<Link>` appears in the viewport, Next JS automatically pr
 
 ## Fetching Data
 
-In Next JS, there are are a couple of approaches for fetching data:
+In Next.js, there are are a couple of approaches for fetching data:
 1. Create an API layer using [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
 2. Using React Server Components, we can skip the API layer and query the database without risking exposing DB secrets to the client
 
@@ -174,7 +174,7 @@ The `@vercel/postgres` SDK doesn't set a caching mechanism
 
 Therefore we're able to set our own static/dynamic behaviour.
 
-We can use the Next JS `unstable_noStore` from `next/cache` inside
+We can use the Next.js `unstable_noStore` from `next/cache` inside
 - Server components
 - or, data fetching functions
 
@@ -193,5 +193,38 @@ This is equivalent to `fetch(..., {cache: 'no-store'})`
 Notes: 
 - `unstable_noStore` is an experimental API which may change
 - A stable API is to use "route segment options" in a page or layout file `export const dynamic = "force-dynamic"`
+
+## Streaming
+
+For slow requests, we can stream them from the server to the client which prevents blocking the whole page from loading
+
+We have two options to impliment streaming:
+1. At a page level via `loading.js`
+2. For specific components via the `<Suspense>` component [from React](https://react.dev/reference/react/Suspense)
+
+### Streaming at a page level via `loading.js`
+
+- The `loading.js` file is a special Next.js file that's built on top of `<Suspense>`
+  - Any components which render via "static rendering" will load immediately.
+  - Any UI in `loading.js` will be embedded as part of the static file and sent first
+  - `loading.js` will apply to any nested pages
+
+If you don't want loading to apply to all nested pages, you can create [Route Groups](https://nextjs.org/docs/app/building-your-application/routing/route-groups)
+
+![Route Groupes](https://nextjs.org/_next/image?url=%2Flearn%2Flight%2Froute-group.png&w=1920&q=75&dpl=dpl_7zM9mAybQHAKmhr33tTURe2yBaXd)
+
+The directory with `()` isn't added to the URL, and now `loading.js` will only apply to that page, and not all pages nested in `dashboard/` directory
+
+### Streaming specific components via React Suspense
+
+```js
+<Suspense fallback={<Loading>}>
+  <DynamicComponent>
+</Suspense>
+```
+
+- We can defer rendering parts of our app until some condition is met (data is loaded)
+
+- The data fetching needs to happen in the `<DynamicComponent>` above, not in a parent and passed as a prop
 
 ## Carry on from https://nextjs.org/learn/dashboard-app/streaming#what-is-streaming

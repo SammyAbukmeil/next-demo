@@ -144,4 +144,78 @@ The whole page is blocked while the data is being fetched
 
 The app is only as fast as the slowest data fetch, however, we can use streaming for the slower requests
 
-## Carry on from https://nextjs.org/learn/dashboard-app/streaming
+## Streaming whole page
+
+- Show whole page loading via `app/dashboard/loading.js`
+
+```js
+export default function Loading() {
+  return <p>Loading...</p>
+}
+```
+
+- Refresh the page, notice that the `<Sidebar>` and `<Header>` load instantly since they're static (i.e. rendered via static rendering)
+
+- Add `app/ui/skeletons.js`
+
+- in `loading.js`
+  - Add `import DashboardSkeleton from "@/app/ui/skeletons";`
+  - Add `return <DashboardSkeleton />;`
+
+- Temporarily update `app/dashboard/invoices/page.js` to show that the loading is applied to this page (as well as the customers page)
+
+```js
+import { fetchRevenue } from "@/app/lib/data";
+
+export default async function Page() {
+  const revenue = await fetchRevenue();
+
+  return <p>Invoces Page</p>;
+}
+```
+
+- This is because `loading.js` is a level higher than `invoices/page.js` and `customers/page.js`
+
+- Create a directory `app/dashboard/(overview)` and move `loading.js` and `page.js` inside it
+
+- Test the invoices page
+
+- Revert the code in `app/dashboard/invoices/page.js`
+
+## Stream individual components
+
+- In `app/dashboard/(overview)/page.js` remove `const revenue = await fetchRevenue();` and the import
+
+- In `app/dashboard/(overview)/page.js` add
+
+```js
+import { Suspense } from 'react';
+import { RevenueChartSkeleton } from '@/app/ui/skeletons';
+
+...
+
+// Wrap <RevenueChart> and remove the `revenue` prop
+<Suspense fallback={<RevenueChartSkeleton />}>
+  <RevenueChart />
+</Suspense>
+```
+
+- In `app/ui/dashboard/revenue-chart.js`
+
+```js
+import { fetchRevenue } from "@/app/lib/data";
+
+export default async function RevenueChart() { // Add async, remove prop
+  const revenue = await fetchRevenue(); // Add
+  ...
+}
+```
+
+- Do the same steps for `<LatestInvoices>`
+  - Import `<LatestInvoicesSkeleton>`
+  - Wrap in `<Suspense fallback={<LatestInvoicesSkeleton />}>`
+  - Remove passing of prop
+  - Move import of `fetchLatestInvoices()` to `app/ui/dashboard/latest-invoices.js`
+  - Remove recieving prop
+
+## Carry on from https://nextjs.org/learn/dashboard-app/streaming#grouping-components
