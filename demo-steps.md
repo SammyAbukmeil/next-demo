@@ -17,6 +17,7 @@
 - Update `layout.js` meta data
 
 - Create `app/ui` and move `global.css` into it + update `layout.js` to import `import "@/app/ui/global.css";`
+  - Explain Path Aliases (see `README.md`)
 
 - Create a `app/ui/home.module.css` to show CSS Modules and add styles in `page.js`
 
@@ -124,16 +125,51 @@ WHERE invoices.amount = 666;
 - Add `app/lib/data.js`
 
   - The logic in here could be done in components, but moving it into a module allows for separate of concerns
-  - MAKE SURE THE TIMEOUT in `fetchRevenue` IS COMMENTED OUT + THE COMMENT ABOVE AND BELOW
+    - Comment out the timeout in `fetchRevenue`
+    - Remove `noStore()` calls + import is removed
 
 - Add `app/lib/utils.js` to get `formatCurrency()`
 
-- Update `app/dashboard/page.js`
+- Update `app/dashboard/page.js` 
+  - Change the following
+
+```js
+import { fetchCardData, fetchLatestInvoices, fetchRevenue } from "@/app/lib/data";
+
+export default async function Page() {
+const revenue = await fetchRevenue();
+const latestInvoices = await fetchLatestInvoices();
+const {
+  numberOfInvoices,
+  numberOfCustomers,
+  totalPaidInvoices,
+  totalPendingInvoices,
+} = await fetchCardData();
+
+...
+
+<Card title="Collected" value={totalPaidInvoices} type="collected" />
+<Card title="Pending" value={totalPendingInvoices} type="pending" />
+<Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
+<Card
+    title="Total Customers"
+    value={numberOfCustomers}
+    type="customers"
+/>
+
+...
+
+<RevenueChart revenue={revenue}  />
+<LatestInvoices latestInvoices={latestInvoices} />
+```
 
 - Add
   - `app/ui/dashboard/cards.js`
+    - (in prep for suspense) In this component remove the `fetchCardData()` call
   - `app/ui/dashboard/revenue-chart.js`
+    - (in prep for suspense) In this component add the `{ revenue }` prop and remove data fetch
   - `app/ui/dashboard/latest-invoces.js`
+    - (in prep for suspense) In this component add the `{ latestInvoices }` prop and remove data fetch
 
 ## Switch to dynamic rendering
 
@@ -162,11 +198,10 @@ export default function Loading() {
 - Add `app/ui/skeletons.js`
 
 - in `loading.js`
-
   - Add `import DashboardSkeleton from "@/app/ui/skeletons";`
   - Add `return <DashboardSkeleton />;`
 
-- Temporarily update `app/dashboard/invoices/page.js` to show that the loading is applied to this page (as well as the customers page)
+- Temporarily update `app/dashboard/invoices/page.js` to show that the loading is applied to this page (as well as the customers page):
 
 ```js
 import { fetchRevenue } from "@/app/lib/data";
