@@ -1,5 +1,13 @@
 # Next.js (V14)
 
+This demo is based off the following guide:
+- https://nextjs.org/learn
+- Chapters 1 - 9
+
+I would recommend going through the full tutorial to learn extra concepts e.g:
+- Server Actions (running code directly on the server)
+- Auth via [NextAuth.js](https://authjs.dev/reference/nextjs)
+
 ## Overview
 
 - Next.js is a React Framework which adds various features to React
@@ -8,6 +16,7 @@
   - Font optimisation
   - Image optimisation
   - Automatic code-splitting and prefetching
+  - Etc
 
 ## Concepts
 
@@ -54,7 +63,7 @@ import { Button } from '@/components/button'
 
 `@` is an alias for the root directory
 
-You can add custom aliases [exmaples](https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#absolute-imports)
+You can add custom aliases [examples](https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#absolute-imports)
 
 ### React Server Components
 
@@ -62,7 +71,7 @@ You can add custom aliases [exmaples](https://nextjs.org/docs/app/building-your-
 - The components are rendered on the server (and can be cached on the server)
 
 Benifits:
-- [nextjs.org/docs/rendering/server-components#benefits-of-server-rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#benefits-of-server-rendering)
+- [Nextjs - Benefits of Server Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#benefits-of-server-rendering)
   - **Performance**: Data fetching on the server improves performance (faster requests, UI will render faster)
   - **Security**: API keys / tokens aren't exposed to the client
   - **Caching**: Requests + the UI that's rendered can be cached + reusued for subsequent requests for multiple users
@@ -125,6 +134,7 @@ In production, when a `<Link>` appears in the viewport, Next.js automatically pr
 - An ORM like [Prisma](https://www.prisma.io)
 
 [Pricing info](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing#pricing)
+  - Hobby plan = 1 DB w/ 60 hrs compute time per month
 
 ## Fetching Data
 
@@ -230,5 +240,3 @@ The directory with `()` isn't added to the URL, and now `loading.js` will only a
 - In general, it's good practice to move your data fetches down to the components that need it, and then wrap those components in `<Suspense>`
 
 - But there is nothing wrong with streaming the sections or the whole page if that's what your application needs.
-
-## Carry on from https://nextjs.org/learn/dashboard-app/partial-prerendering

@@ -35,7 +35,7 @@ import styles from "@/app/ui/home.module.css";
 
 - Move the `<h1>` to a `<Header />` in `layout.js`
 
-- `npm i sass` and add `app/ui/Header/Header.scss` styles. 
+- `npm i sass` and add `app/ui/Header/Header.scss` styles.
 
 - Update `globals.css` to `global.scss`
 
@@ -104,7 +104,8 @@ export default function Page() {
 
 - Make `app/lib/placeholder-data.js`
 
-- Add `"seed": "node -r dotenv/config ./scripts/seed.js"` script 
+- Add `"seed": "node -r dotenv/config ./scripts/seed.js"` script
+
   - `-r` loads config from `dotenv` in `node_modules`
 
 - Run `npm run seed`
@@ -121,24 +122,26 @@ WHERE invoices.amount = 666;
 ## Fetching Data
 
 - Add `app/lib/data.js`
+
   - The logic in here could be done in components, but moving it into a module allows for separate of concerns
   - MAKE SURE THE TIMEOUT in `fetchRevenue` IS COMMENTED OUT + THE COMMENT ABOVE AND BELOW
 
 - Add `app/lib/utils.js` to get `formatCurrency()`
 
-- Update `app/dashboard/page.js` 
+- Update `app/dashboard/page.js`
 
-- Add 
+- Add
   - `app/ui/dashboard/cards.js`
   - `app/ui/dashboard/revenue-chart.js`
   - `app/ui/dashboard/latest-invoces.js`
 
 ## Switch to dynamic rendering
 
- In `app/lib/data.js`
- - Add `import { unstable_noStore as noStore } from 'next/cache';`
- - Add `noStore();` too all data fetching functions
- - Comment in the timeout and the console logs below and above (you'll see in the terminal)
+In `app/lib/data.js`
+
+- Add `import { unstable_noStore as noStore } from 'next/cache';`
+- Add `noStore();` too all data fetching functions
+- Comment in the timeout and the console logs below and above (you'll see in the terminal)
 
 The whole page is blocked while the data is being fetched
 
@@ -150,7 +153,7 @@ The app is only as fast as the slowest data fetch, however, we can use streaming
 
 ```js
 export default function Loading() {
-  return <p>Loading...</p>
+  return <p>Loading...</p>;
 }
 ```
 
@@ -159,6 +162,7 @@ export default function Loading() {
 - Add `app/ui/skeletons.js`
 
 - in `loading.js`
+
   - Add `import DashboardSkeleton from "@/app/ui/skeletons";`
   - Add `return <DashboardSkeleton />;`
 
@@ -212,6 +216,7 @@ export default async function RevenueChart() { // Add async, remove prop
 ```
 
 - Do the same steps for `<LatestInvoices>`
+
   - Import `<LatestInvoicesSkeleton>`
   - Wrap in `<Suspense fallback={<LatestInvoicesSkeleton />}>`
   - Remove passing of prop
@@ -233,5 +238,3 @@ export default async function RevenueChart() { // Add async, remove prop
 - Delete `loading.js`
 - Move `page.js` to `dashboard/`
 - Delete (overview)
-
-## Carry on from https://nextjs.org/learn/dashboard-app/partial-prerendering
