@@ -240,3 +240,11 @@ The directory with `()` isn't added to the URL, and now `loading.js` will only a
 - In general, it's good practice to move your data fetches down to the components that need it, and then wrap those components in `<Suspense>`
 
 - But there is nothing wrong with streaming the sections or the whole page if that's what your application needs.
+
+## Server Actions
+
+React Server Actions allow you to run async code directly on the server
+- No need to create API endpoints to mutate data
+- Can be invoked from Client Components or Server Components
+
+https://nextjs.org/learn/dashboard-app/mutating-data#what-are-server-actions
