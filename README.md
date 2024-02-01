@@ -247,4 +247,24 @@ React Server Actions allow you to run async code directly on the server
 - No need to create API endpoints to mutate data
 - Can be invoked from Client Components or Server Components
 
+### How it works
+
+Use the `use server` directive in your function, and the `action` attribute on your from
+
+```javascript
+// Server component
+export default function Page() {
+
+  // Action
+  async function create(formData) {
+    'use server';
+ 
+    // Validate + execute SQL query
+  }
+ 
+  // Invoke the action using the "action" attribute
+  return <form action={create}>...</form>;
+}
+```
+
 https://nextjs.org/learn/dashboard-app/mutating-data#what-are-server-actions
