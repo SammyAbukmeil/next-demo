@@ -83,11 +83,15 @@ export default function Page() {
 
 - Add `app/dashboard/layout.js` and `app/ui/dashboard/sidebar.js`
 
+- Explain Automatic code-splitting and prefetching (see `README.md`)
+
 - Add a `<Link>` to the `<Header>` to go back to the homepage
 
 - Add a `<Link>` to the homepage to go to the dashboard
 
 ## Database
+
+- Explain Vercel Postgres (see `README.md`)
 
 - Deploy the project on Vercel
 
@@ -121,6 +125,10 @@ WHERE invoices.amount = 666;
 ```
 
 ## Fetching Data
+
+- Explain React Server Components (see `README.md`)
+
+- Explain Fetching Data (see `README.md`)
 
 - Add `app/lib/data.js`
 
@@ -173,6 +181,8 @@ const {
 
 ## Switch to dynamic rendering
 
+- Explain Static vs Dynamic Rendering (see `README.md`)
+
 In `app/lib/data.js`
 
 - Add `import { unstable_noStore as noStore } from 'next/cache';`
@@ -184,6 +194,8 @@ The whole page is blocked while the data is being fetched
 The app is only as fast as the slowest data fetch, however, we can use streaming for the slower requests
 
 ## Streaming whole page
+
+- Explain Streaming (see `README.md`)
 
 - Show whole page loading via `app/dashboard/loading.js`
 
@@ -273,3 +285,13 @@ export default async function RevenueChart() { // Add async, remove prop
 - Delete `loading.js`
 - Move `page.js` to `dashboard/`
 - Delete (overview)
+
+## Add a server action
+
+- Update `app/dashboard/invoices/page.js`
+  - Add `app/ui/invoices/create-form.js`
+  - Add `app/ui/button.js`
+
+- Add `app/lib/actions.js`
+
+We would normally have another component showing the invoices

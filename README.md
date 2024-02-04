@@ -1,13 +1,5 @@
 # Next.js (V14)
 
-This demo is based off the following guide:
-- https://nextjs.org/learn
-- Chapters 1 - 9
-
-I would recommend going through the full tutorial to learn extra concepts e.g:
-- Server Actions (running code directly on the server)
-- Auth via [NextAuth.js](https://authjs.dev/reference/nextjs)
-
 ## Overview
 
 - Next.js is a React Framework which adds various features to React
@@ -135,6 +127,8 @@ In production, when a `<Link>` appears in the viewport, Next.js automatically pr
 
 [Pricing info](https://vercel.com/docs/storage/vercel-postgres/usage-and-pricing#pricing)
   - Hobby plan = 1 DB w/ 60 hrs compute time per month
+  - Compute time = The hours that your database is active multiplied by the number of CPUs that your database has available (Hobby = 0.25 CPUs, Pro = 1 CPU)
+  - Active time = When the DB is receiving requests, and for a period of 5 minutes after the last request is received
 
 ## Fetching Data
 
@@ -243,13 +237,13 @@ The directory with `()` isn't added to the URL, and now `loading.js` will only a
 
 ## Server Actions
 
-React Server Actions allow you to run async code directly on the server
+React Server Actions allow you to run async code directly on the server to mutate data
 - No need to create API endpoints to mutate data
 - Can be invoked from Client Components or Server Components
 
 ### How it works
 
-Use the `use server` directive in your function, and the `action` attribute on your from
+Use the `use server` directive in your function to make it an "Action", and the `action` attribute on your from
 
 ```javascript
 // Server component
@@ -266,5 +260,3 @@ export default function Page() {
   return <form action={create}>...</form>;
 }
 ```
-
-https://nextjs.org/learn/dashboard-app/mutating-data#what-are-server-actions
